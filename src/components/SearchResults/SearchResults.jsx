@@ -1,5 +1,5 @@
 // src/components/SearchResults.jsx
-import Tracklist from "./Tracklist";
+import Tracklist from "../Tracklist/Tracklist";
 
 function SearchResults({ tracks }) {
   return (

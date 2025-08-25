@@ -1,8 +1,8 @@
 // src/App.jsx
-import SearchBar from "./components/SearchBar";
-import SearchResults from "./components/SearchResults";
-import Playlist from "./components/Playlist";
-import "./styles/app.css";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResults from "../SearchResults/SearchResults";
+import Playlist from "../Playlist/Playlist";
+import styles from './App.module.css';
 
 const mockResults = [
   { id: "1", name: "Shape of You", artist: "Ed Sheeran", album: "Divide", uri: "spotify:track:1" },
@@ -17,23 +17,21 @@ const mockPlaylist = [
 
 function App() {
   return (
-    <div className="app">
-      <header className="app__header">
+    <div className={styles.app}>
+      <header className={styles.app__header}>
         <h1>Jammming</h1>
       </header>
-
-      <main className="app__main">
+      <main className={styles.app__main}>
         {/* Barra de búsqueda (estática) */}
         <SearchBar />
-
         {/* Dos columnas: Results y Playlist */}
-        <section className="app__columns">
+        <section className={styles.app__columns}>
           <SearchResults tracks={mockResults} />
           <Playlist name="New Playlist" tracks={mockPlaylist} />
         </section>
       </main>
     </div>
   );
-}
+};
 
 export default App;

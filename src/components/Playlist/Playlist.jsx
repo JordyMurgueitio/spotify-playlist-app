@@ -1,5 +1,5 @@
 // src/components/Playlist.jsx
-import Tracklist from "./Tracklist";
+import Tracklist from "../Tracklist/Tracklist";
 
 function Playlist({ name, tracks }) {
   return (

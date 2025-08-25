@@ -1,5 +1,5 @@
 // src/components/Tracklist.jsx
-import Track from "./Track";
+import Track from "../Track/Track";
 
 function Tracklist({ tracks, mode }) {
   return (
