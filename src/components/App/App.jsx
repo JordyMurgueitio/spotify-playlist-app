@@ -22,7 +22,6 @@ function App() {
         <h1>Jammming</h1>
       </header>
       <main className={styles.app__main}>
-        {/* Barra de búsqueda (estática) */}
         <SearchBar />
         {/* Dos columnas: Results y Playlist */}
         <section className={styles.app__columns}>

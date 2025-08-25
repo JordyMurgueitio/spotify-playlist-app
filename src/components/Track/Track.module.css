@@ -1,0 +1,49 @@
+.track {
+    background-color: rgba(127, 255, 212, 0);
+}
+.track__name {
+    font-weight: bold;
+    color: darkcyan;
+    margin-bottom: 10px;
+}
+.track__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.track__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+}
+.track__artist {
+    color: darkgreen;
+    margin: 0;
+}
+.track__album {
+    color: rgb(199, 199, 204);
+    margin: 0;
+}
+.btn {
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background 0.2s ease;
+}
+
+.btn--icon {
+    display: flex;
+    color: rgb(0, 0, 0);
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.btn--icon:hover {
+    background-color: darkcyan;
+}

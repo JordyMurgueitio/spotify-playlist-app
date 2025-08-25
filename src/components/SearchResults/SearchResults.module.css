@@ -1,0 +1,13 @@
+.panel {
+    background-color: rgb(52, 105, 88);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;    
+    width: 50%;
+}
+
+.panel__title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+

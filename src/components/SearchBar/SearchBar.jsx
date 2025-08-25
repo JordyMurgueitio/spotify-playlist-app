@@ -1,14 +1,14 @@
-// src/components/SearchBar.jsx
+import styles from './SearchBar.module.css';
 function SearchBar() {
     return (
-        <div className="search-bar" role="search">
+        <div className={styles.searchBar} role="search">
             <input
-                className="search-bar__input"
+                className={styles.searchBar__input}
                 type="text"
                 placeholder="Enter a song, album, or artist"
                 aria-label="Search term"
             />
-            <button className="btn" type="button" aria-label="Search">
+            <button className={styles.searchBar__button} type="button" aria-label="Search">
                 Search
             </button>
         </div>

@@ -1,8 +1,23 @@
 .app {
-  background-color: aqua;
+  background-color: rgb(43, 48, 48);
 }
 .app__header {
   background-color: #282c34;
   padding: 20px;
   text-align: center;
+}
+
+.app__main {
+  background-color: rgb(52, 105, 88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.app__columns {
+  background-color: rgb(35, 34, 31);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
