@@ -1,14 +1,14 @@
 .app {
-  background-color: rgb(43, 48, 48);
+  background-color: #191414;
 }
 .app__header {
-  background-color: #282c34;
+  background-color: #1DB954;
   padding: 20px;
   text-align: center;
 }
 
 .app__main {
-  background-color: rgb(52, 105, 88);
+  background-color: #191414;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +16,10 @@
 }
 
 .app__columns {
-  background-color: rgb(35, 34, 31);
+  background-color: rgba(9, 8, 7, 0);
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-wrap: wrap;
 }
+

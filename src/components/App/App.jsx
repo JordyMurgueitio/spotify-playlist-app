@@ -13,6 +13,7 @@ const mockResults = [
 const mockPlaylist = [
   { id: "10", name: "Yellow", artist: "Coldplay", album: "Parachutes", uri: "spotify:track:10" },
   { id: "11", name: "Fix You", artist: "Coldplay", album: "X&Y", uri: "spotify:track:11" },
+  { id: "1", name: "Shape of You", artist: "Ed Sheeran", album: "Divide", uri: "spotify:track:1" },
 ];
 
 function App() {

@@ -1,10 +1,11 @@
 .track {
-    background-color: rgba(127, 255, 212, 0);
+    border-bottom: 1px solid rgba(199, 199, 204, 0.2);
+    padding-bottom: 5px;
 }
 .track__name {
     font-weight: bold;
-    color: darkcyan;
-    margin-bottom: 10px;
+    color: #f1f1f1;
+    margin-bottom: 5px;
 }
 .track__info {
     display: flex;
@@ -17,21 +18,20 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
-
 }
 .track__artist {
-    color: darkgreen;
+    color: #1DB954;
     margin: 0;
 }
 .track__album {
-    color: rgb(199, 199, 204);
+    color: #f1f1f1;
     margin: 0;
 }
 .btn {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: 50%;
     transition: background 0.2s ease;
 }
 
@@ -45,5 +45,6 @@
 }
 
 .btn--icon:hover {
-    background-color: darkcyan;
+    background-color: #FF5C8A;
+    color: #f1f1f1;
 }
