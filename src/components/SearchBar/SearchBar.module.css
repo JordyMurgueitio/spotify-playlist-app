@@ -13,6 +13,8 @@
     flex: 1;
     font-size: 1.1em;
     border-radius: 4px 0 0 4px;
+    background-color: #171e1959;
+    color: #f1f1f1;
     padding: 10px;
 }
 
@@ -27,4 +29,16 @@
 }
 .searchBar__button:hover {
     background-color: #FF5C8A;
+}
+
+@media screen and (min-width: 768px) {
+    .searchBar {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .searchBar {
+        width: 50%;
+    }
 }
