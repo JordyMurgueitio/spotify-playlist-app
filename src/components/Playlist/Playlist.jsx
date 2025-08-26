@@ -2,15 +2,16 @@ import React from "react";
 import styles from "./Playlist.module.css";
 import Tracklist from "../Tracklist/Tracklist";
 
-function Playlist({ name, tracks, onRemove }) {
+function Playlist({ name, tracks, onRemove, onNameChange }) {
     return (
         <section className={styles.panel}>
             {/* En este paso dejamos el value fijo. Más adelante será un input controlado */}
             <input
                 className={styles.playlist__name}
                 type="text"
-                defaultValue={name}
+                value={name}
                 aria-label="Playlist name"
+                onChange={(e) => onNameChange(e.target.value)} // Actualizamos el nombre de la playlist
             />
 
             <Tracklist tracks={tracks} mode="remove" onRemove={onRemove} />
