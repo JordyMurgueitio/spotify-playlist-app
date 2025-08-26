@@ -33,9 +33,6 @@
     padding: 0.5rem;
     border-radius: 50%;
     transition: background 0.2s ease;
-}
-
-.btn--icon {
     display: flex;
     color: rgb(0, 0, 0);
     align-items: center;
@@ -43,8 +40,7 @@
     width: 2rem;
     height: 2rem;
 }
-
-.btn--icon:hover {
-    background-color: #FF5C8A;
+.btn:hover {
+    background-color: #FF5C8A;;
     color: #f1f1f1;
 }

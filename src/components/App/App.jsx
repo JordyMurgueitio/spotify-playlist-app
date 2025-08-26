@@ -19,6 +19,17 @@ function App() {
 		{ id: "11", name: "Fix You", artist: "Coldplay", album: "X&Y", uri: "spotify:track:11" },
 	]);
 	const [playlistName, setPlaylistName] = useState("New Playlist");
+	const addTrack = (track) => {
+		if (playlist.find((savedTrack) => savedTrack.id === track.id)) {
+			return;
+		}
+		setPlaylist((prevPlaylist) => [...prevPlaylist, track]);
+	};
+	const removeTrack = (track) => {
+		setPlaylist((prevPlaylist) => 
+			prevPlaylist.filter((savedTrack) => savedTrack.id !== track.id)
+		);
+	};
 	return (
 		<div className={styles.app}>
 			<header className={styles.app__header}>
@@ -28,8 +39,8 @@ function App() {
 				<SearchBar />
 				{/* Dos columnas: Results y Playlist */}
 				<section className={styles.app__columns}>
-					<SearchResults tracks={searchResults} />
-					<Playlist name={playlistName} tracks={playlist} />
+					<SearchResults tracks={searchResults} onAdd={addTrack}  />
+					<Playlist name={playlistName} tracks={playlist} onRemove={removeTrack} />
 				</section>
 			</main>
 		</div>

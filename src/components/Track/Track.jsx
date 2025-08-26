@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./Track.module.css";
 
-function Track({ track, mode }) {
+function Track({ track, mode, onAdd, onRemove }) {
 	const isAdd = mode === "add";
 	const actionLabel = isAdd ? "Add track" : "Remove track";
 	const actionSymbol = isAdd ? "+" : "-";
-
+	const handleClick = () => {
+		if (isAdd) {
+			onAdd(track);
+		} else {
+			onRemove(track);
+		}
+	};
 	return (
 		<article className={styles.track}>
 			<h3 className={styles.track__name}>{track.name}</h3>
@@ -19,11 +25,11 @@ function Track({ track, mode }) {
 					</p>
 				</div>
 				<button
-					className={`${styles.btn} ${styles["btn--icon"]}`}
+					className={`${styles.btn}`}
 					type="button"
 					aria-label={actionLabel}
 					title={actionLabel}
-					// sin onClick por ahora (paso 3 = estático)
+					onClick={handleClick}
 				>
 					{actionSymbol}
 				</button>
