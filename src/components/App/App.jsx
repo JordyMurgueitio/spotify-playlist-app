@@ -1,34 +1,66 @@
 // src/App.jsx
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
+import Spotify from "../../spotify/SpotifyAuth";
 import styles from './App.module.css';
 
 
+const CLIENT_ID = "8aed6c0704e54dc29669e22578d58898"; // 👈 pega aquí tu client_id de Spotify
+const REDIRECT_URI = "https://jordymurgueitio.github.io/spotify-playlist-app/"; // 👈 o tu GitHub Pages URL
+const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const RESPONSE_TYPE = "token";
+const SCOPES = "playlist-modify-public playlist-modify-private";
 
 
 function App() {
-	const [searchResults, setSearchResults] = useState([
-		{ id: "1", name: "Shape of You", artist: "Ed Sheeran", album: "Divide", uri: "spotify:track:1" },
-		{ id: "2", name: "Blinding Lights", artist: "The Weeknd", album: "After Hours", uri: "spotify:track:2" },
-		{ id: "3", name: "Levitating", artist: "Dua Lipa", album: "Future Nostalgia", uri: "spotify:track:3" },
-	]);
-	const [playlist, setPlaylist] = useState([
-		{ id: "10", name: "Yellow", artist: "Coldplay", album: "Parachutes", uri: "spotify:track:10" },
-		{ id: "11", name: "Fix You", artist: "Coldplay", album: "X&Y", uri: "spotify:track:11" },
-	]);
+	const [searchResults, setSearchResults] = useState([]);
+	const [playlistTracks, setPlaylistTracks] = useState([]);
 	const [playlistName, setPlaylistName] = useState("New Playlist");
+	const [token, setToken] = useState("");
+	// Al cargar la app, revisamos si ya tenemos un token en la URL
+	useEffect(() => {
+		const hash = window.location.hash;
+		let token = window.localStorage.getItem("token");
+
+		if (!token && hash) {
+		token = hash
+			.substring(1)
+			.split("&")
+			.find((elem) => elem.startsWith("access_token"))
+			.split("=")[1];
+
+		window.location.hash = ""; // limpiamos el hash
+		window.localStorage.setItem("token", token);
+		}
+
+		setToken(token);
+	}, []);
+
+	const logout = () => {
+		setToken("");
+		window.localStorage.removeItem("token");
+	};
+	/* Function to search for tracks */
+	const search = async (term) => {
+		try {
+			const results = await Spotify.searchTracks(term);
+			setSearchResults(results);
+		} catch (error) {
+			console.error("Error searching for tracks:", error);
+		}
+	};
 	/* Function to add track to playlist */
 	const addTrack = (track) => {
-		if (playlist.find((savedTrack) => savedTrack.id === track.id)) {
+		if (playlistTracks.find((savedTrack) => savedTrack.id === track.id)) {
 			return;
 		}
-		setPlaylist((prevPlaylist) => [...prevPlaylist, track]);
+		setPlaylistTracks((prevPlaylist) => [...prevPlaylist, track]);
 	};
 	/* Function to remove track from playlist */
 	const removeTrack = (track) => {
-		setPlaylist((prevPlaylist) => 
+		setPlaylistTracks((prevPlaylist) => 
 			prevPlaylist.filter((savedTrack) => savedTrack.id !== track.id)
 		);
 	};
@@ -36,13 +68,24 @@ function App() {
 		<div className={styles.app}>
 			<header className={styles.app__header}>
 				<h1>Jammming</h1>
+				{!token ? (
+					<a
+					href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(
+						SCOPES
+					)}`}
+					>
+					<button>Login con Spotify</button>
+					</a>
+				) : (
+					<button onClick={logout}>Logout</button>
+				)}
 			</header>
 			<main className={styles.app__main}>
-				<SearchBar />
+				<SearchBar onSearch={search} />
 				{/* Dos columnas: Results y Playlist */}
 				<section className={styles.app__columns}>
 					<SearchResults tracks={searchResults} onAdd={addTrack}  />
-					<Playlist name={playlistName} tracks={playlist} onRemove={removeTrack} onNameChange={setPlaylistName} />
+					<Playlist name={playlistName} tracks={playlistTracks} onRemove={removeTrack} onNameChange={setPlaylistName} />
 				</section>
 			</main>
 		</div>
