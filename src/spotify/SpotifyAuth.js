@@ -1,31 +1,17 @@
-const clientId = "8aed6c0704e54dc29669e22578d58898";
-const redirectUri = "https://jordymurgueitio.github.io/spotify-playlist-app/";
-let accessToken;
+let accessToken= "";
 
 const Spotify = {
-    getAccessToken() {
-        if (accessToken) {
-            return accessToken;
-        }
-        const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-        const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-        if (accessTokenMatch && expiresInMatch) {
-            accessToken = accessTokenMatch[1];
-            const expiresIn = Number(expiresInMatch[1]);
-            window.setTimeout(() => accessToken = '', expiresIn * 1000);
-            window.history.pushState('Access Token', null, '/'); // This clears the parameters, allowing us to grab a new access token when it expires.
-            return accessToken;
-        } else {
-            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-            window.location = accessUrl;
-        }
+    setAccessToken(token) {
+        accessToken = token;
     },
     async searchTracks(term) {
-        const token = Spotify.getAccessToken();
+        if (!accessToken) {
+            throw new Error("Access token is not set");
+        }
         const response = await fetch(
-            `https://api.spotify.com/v1/search?type=track&q=${term}`,
+            `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(term)}`,
             {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${accessToken}` },
             }
         );
         const jsonResponse = await response.json();

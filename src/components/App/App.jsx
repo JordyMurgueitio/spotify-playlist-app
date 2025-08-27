@@ -34,8 +34,10 @@ function App() {
 		window.location.hash = ""; // limpiamos el hash
 		window.localStorage.setItem("token", token);
 		}
-
-		setToken(token);
+		if (token) {
+			Spotify.setAccessToken(token);
+			setToken(token);
+		}
 	}, []);
 
 	const logout = () => {
