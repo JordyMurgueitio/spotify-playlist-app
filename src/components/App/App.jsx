@@ -34,10 +34,7 @@ function App() {
 		window.location.hash = ""; // limpiamos el hash
 		window.localStorage.setItem("token", token);
 		}
-		if (token) {
-			Spotify.setAccessToken(token);
-			setToken(token);
-		}
+		setToken(token);
 	}, []);
 
 	const logout = () => {
@@ -47,7 +44,7 @@ function App() {
 	/* Function to search for tracks */
 	const search = async (term) => {
 		try {
-			const results = await Spotify.searchTracks(term);
+			const results = await Spotify.searchTracks(term, token);
 			setSearchResults(results);
 		} catch (error) {
 			console.error("Error searching for tracks:", error);

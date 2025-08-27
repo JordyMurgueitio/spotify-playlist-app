@@ -1,17 +1,14 @@
-let accessToken= "";
+
 
 const Spotify = {
-    setAccessToken(token) {
-        accessToken = token;
-    },
-    async searchTracks(term) {
-        if (!accessToken) {
+    async searchTracks(term, token) {
+        if (!token) {
             throw new Error("Access token is not set");
         }
         const response = await fetch(
             `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(term)}`,
             {
-                headers: { Authorization: `Bearer ${accessToken}` },
+                headers: { Authorization: `Bearer ${token}` },
             }
         );
         const jsonResponse = await response.json();
